@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import React from 'react'
 
 type Props = {}
@@ -7,7 +7,10 @@ const VectorDBpage = (props: Props) => {
   return (
     <main className='flex flex-col items-center p-24'>
         <Card>
-            <CardHeader></CardHeader>
+            <CardHeader>
+              <CardTitle>Update Knowledge Base</CardTitle>
+              <CardDescription>Add new Documents to your Vector DB</CardDescription>
+            </CardHeader>
             <CardContent></CardContent>
         </Card>
     </main>
