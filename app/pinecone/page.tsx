@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import React from 'react'
 
@@ -11,7 +12,14 @@ const VectorDBpage = (props: Props) => {
               <CardTitle>Update Knowledge Base</CardTitle>
               <CardDescription>Add new Documents to your Vector DB</CardDescription>
             </CardHeader>
-            <CardContent></CardContent>
+            <CardContent>
+              <div className='grid grid-cols-3 gap-4'>
+                <div className='col-span-2 grid gap-4 border rounded-lg p-6'>
+
+                </div>
+                <Button variant={'outline'} className='w-full h-full'></Button>
+              </div>
+            </CardContent>
         </Card>
     </main>
   )
