@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 import { TextLoader } from 'langchain/document_loaders/fs/text';
+import { Pinecone } from '@pinecone-database/pinecone';
 
 export default async (req:NextApiRequest, res:NextApiResponse ) => {
     if(req.method === 'POST') {
@@ -18,4 +19,7 @@ async function handleUpload(indexname: string, namespace: string, res: NextApiRe
         '.txt': (path: string) => new TextLoader(path)
     });
     const docs = await loader.load();
+    const client = new Pinecone({
+        apiKey: process.env.PINECONE_API_KEY!,
+    })
 }
