@@ -1,4 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
+import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 
 export default async (req:NextApiRequest, res:NextApiResponse ) => {
     if(req.method === 'POST') {
@@ -8,5 +10,7 @@ export default async (req:NextApiRequest, res:NextApiResponse ) => {
 }
 
 function handleUpload(indexname: string, namespace: string, res: NextApiResponse) {
-    throw new Error("Function not implemented.");
+    const loader = new DirectoryLoader('./documents', {
+        '.pdf': (path: string) => new PDFLoader(path)
+    })
 }
