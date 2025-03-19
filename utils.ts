@@ -6,7 +6,7 @@ export async function updateVectorDB(
     indexname: string,
     namespace: string,
     docs: Document[],
-    progressCallback: (fileName: string, totalChunks: number, chunksUpserted: number, isComplete: boolean) 
+    progressCallback: (fileName: string, totalChunks: number, chunksUpserted: number, isComplete: boolean) => void
 
 ) {
     
