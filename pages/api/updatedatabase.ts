@@ -3,6 +3,7 @@ import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 import { TextLoader } from 'langchain/document_loaders/fs/text';
 import { Pinecone } from '@pinecone-database/pinecone';
+import { updateVectorDB } from "@/utils";
 
 export default async (req:NextApiRequest, res:NextApiResponse ) => {
     if(req.method === 'POST') {
@@ -21,5 +22,17 @@ async function handleUpload(indexname: string, namespace: string, res: NextApiRe
     const docs = await loader.load();
     const client = new Pinecone({
         apiKey: process.env.PINECONE_API_KEY!,
+    })
+    await updateVectorDB(client, indexname, namespace, docs, (filename, totalChunks, chunksUpserted, isComplete) => {
+        if(!isComplete){
+            res.write(
+                JSON.stringify({
+                    filename,
+                    totalChunks,
+                    chunksUpserted,
+                    isComplete
+                })
+            );
+        }
     })
 }
